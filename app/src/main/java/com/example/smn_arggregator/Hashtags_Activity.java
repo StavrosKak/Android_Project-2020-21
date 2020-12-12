@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import twitter4j.Status;
 
 public class Hashtags_Activity extends AppCompatActivity {
 
@@ -37,9 +40,9 @@ public class Hashtags_Activity extends AppCompatActivity {
 
         ArrayList<String> Hashtags;
 
-        GetTwitterData hashtagObject = new GetTwitterData(ConsumerKey,ConsumerSecretKey,AccessToken,AccessSecretToken);
+        final GetTwitterData TwitterObject = new GetTwitterData(ConsumerKey,ConsumerSecretKey,AccessToken,AccessSecretToken);
 
-        Hashtags = hashtagObject.getTrends();
+        Hashtags = TwitterObject.getTrends();
 
         searchView = findViewById(R.id.search_bar);
         listView = findViewById(R.id.list_item);
@@ -50,7 +53,13 @@ public class Hashtags_Activity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                List<Status> posts;
                 Toast.makeText(Hashtags_Activity.this, "You Click: "+ parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+                posts =  TwitterObject.getPost(parent.getItemAtPosition(position).toString());
+                setContentView(R.layout.posts_list);
+                ListView postListView = findViewById(R.id.PostListView);
+                PostArrayAdapter postArrayAdapter = new PostArrayAdapter(Hashtags_Activity.this,R.layout.list_record,posts);
+                postListView.setAdapter(postArrayAdapter);
             }
         });
 

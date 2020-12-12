@@ -4,7 +4,11 @@ import android.telephony.AccessNetworkConstants;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import twitter4j.Query;
+import twitter4j.QueryResult;
+import twitter4j.Status;
 import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.Twitter;
@@ -56,6 +60,31 @@ public class GetTwitterData {
         }
 
         return Hashtags;
+    }
+
+    public List<Status> getPost(String hashtag){
+        try {
+            Query query = new Query(hashtag);
+            query.setCount(10);
+            QueryResult result;
+            result = twitter.search(query);
+            List<Status> tweets = result.getTweets();
+
+            // *****for debug*******
+            for (Status tweet : tweets) {
+
+                Log.d("Bull","@" + tweet.getUser().getName()+ " ---- " + tweet.getText());
+            }
+            //*********
+            return tweets;
+
+        } catch (TwitterException te) {
+            te.printStackTrace();
+            Log.d("Bull","Failed to search tweets: " + te.getMessage());
+
+        }
+
+        return null;
     }
 
 
