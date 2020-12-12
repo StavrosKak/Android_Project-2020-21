@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF9800"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/hastagBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:backgroundTint="#009688"
+        android:text="Trending Hastags"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/postBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#009688"
+        android:text="Post"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/hastagBtn"
+        app:layout_constraintStart_toStartOf="@+id/hastagBtn"
+        app:layout_constraintTop_toBottomOf="@+id/hastagBtn" />
+
+    <Button
+        android:id="@+id/storyBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#009688"
+        android:text="Story"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/postBtn"
+        app:layout_constraintStart_toStartOf="@+id/postBtn"
+        app:layout_constraintTop_toBottomOf="@+id/postBtn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
