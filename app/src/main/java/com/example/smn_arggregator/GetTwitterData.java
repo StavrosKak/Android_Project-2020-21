@@ -18,15 +18,20 @@ import twitter4j.conf.ConfigurationBuilder;
 
 public class GetTwitterData {
 
+    private static final String ConsumerKey = BuildConfig.ConsumerKey;
+    private static final String ConsumerSecretKey = BuildConfig.ConsumerSecretKey;
+    private static final String AccessToken = BuildConfig.AccessToken;
+    private static final String AccessSecretToken = BuildConfig.AccessSecretToken;
+
     private Twitter twitter;
 
-    public GetTwitterData(String ConsumerKey, String ConsumerSecretKey, String AccessToken, String AccessSecreteToken){
+    public GetTwitterData(){
         ConfigurationBuilder cb = new ConfigurationBuilder();
         cb.setDebugEnabled(true)
                 .setOAuthConsumerKey(ConsumerKey)
                 .setOAuthConsumerSecret(ConsumerSecretKey)
                 .setOAuthAccessToken(AccessToken)
-                .setOAuthAccessTokenSecret(AccessSecreteToken);
+                .setOAuthAccessTokenSecret(AccessSecretToken);
 
         TwitterFactory tf = new TwitterFactory(cb.build());
 
@@ -66,6 +71,8 @@ public class GetTwitterData {
         try {
             Query query = new Query(hashtag);
             query.setCount(10);
+            query.setLang("en");
+            query.setResultType(Query.ResultType.popular);
             QueryResult result;
             result = twitter.search(query);
             List<Status> tweets = result.getTweets();

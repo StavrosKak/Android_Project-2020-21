@@ -3,6 +3,7 @@ package com.example.smn_arggregator;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.View;
@@ -18,11 +19,6 @@ import twitter4j.Status;
 
 public class Hashtags_Activity extends AppCompatActivity {
 
-    private static final String ConsumerKey = BuildConfig.ConsumerKey;
-    private static final String ConsumerSecretKey = BuildConfig.ConsumerSecretKey;
-    private static final String AccessToken = BuildConfig.AccessToken;
-    private static final String AccessSecretToken = BuildConfig.AccessSecretToken;
-
     SearchView searchView;
     ListView listView;
     ArrayAdapter<String> arrayAdapter;
@@ -37,10 +33,9 @@ public class Hashtags_Activity extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-
         ArrayList<String> Hashtags;
 
-        final GetTwitterData TwitterObject = new GetTwitterData(ConsumerKey,ConsumerSecretKey,AccessToken,AccessSecretToken);
+        GetTwitterData TwitterObject = new GetTwitterData();
 
         Hashtags = TwitterObject.getTrends();
 
@@ -53,13 +48,11 @@ public class Hashtags_Activity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                List<Status> posts;
                 Toast.makeText(Hashtags_Activity.this, "You Click: "+ parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-                posts =  TwitterObject.getPost(parent.getItemAtPosition(position).toString());
-                setContentView(R.layout.posts_list);
-                ListView postListView = findViewById(R.id.PostListView);
-                PostArrayAdapter postArrayAdapter = new PostArrayAdapter(Hashtags_Activity.this,R.layout.list_record,posts);
-                postListView.setAdapter(postArrayAdapter);
+                Intent intent = new Intent(Hashtags_Activity.this,PostViewActivity.class);
+                intent.putExtra("hashtag",parent.getItemAtPosition(position).toString());
+                startActivity(intent);
+
             }
         });
 
