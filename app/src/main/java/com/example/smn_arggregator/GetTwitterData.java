@@ -46,7 +46,7 @@ public class GetTwitterData {
 
         try{
             // UK = 23424975  United States: 23424977 New York: 2459115
-            Trends trends = twitter.getPlaceTrends(23424977);
+            Trends trends = twitter.getPlaceTrends(23424975);
             int count =0;
 
             for(Trend trend : trends.getTrends()){

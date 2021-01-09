@@ -8,42 +8,71 @@
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="166dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="187dp"
-        android:text="POSTS"
+        android:text="Add your text here :"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/twitterBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="130dp"
-        android:text="Twiter"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="150dp"
+        android:text="Twitter"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
-        android:id="@+id/checkBox2"
+        android:id="@+id/facebookBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
         android:text="Facebook"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox"
-        app:layout_constraintStart_toEndOf="@+id/checkBox" />
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/twitterBox"
+        app:layout_constraintStart_toEndOf="@+id/twitterBox" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/instagramBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         android:text="Instagram"
-        app:layout_constraintBaseline_toBaselineOf="@+id/checkBox2"
+        android:textSize="18sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/facebookBox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/checkBox2" />
+        app:layout_constraintStart_toEndOf="@+id/facebookBox" />
+
+    <EditText
+        android:id="@+id/textField"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="Enter your text"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <Button
+        android:id="@+id/postButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="#FFEB3B"
+        android:text="Post"
+        android:textColor="#E91E63"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twitterBox" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

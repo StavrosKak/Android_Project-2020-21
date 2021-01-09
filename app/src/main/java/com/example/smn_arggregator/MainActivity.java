@@ -10,19 +10,14 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button hastags_btn ;
-    private Button posts_btn;
-    private Button story_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        hastags_btn = findViewById(R.id.hastagBtn);
-        posts_btn = findViewById(R.id.postBtn);
-        story_btn = findViewById(R.id.storyBtn);
+        Button hastags_btn = findViewById(R.id.hastagBtn);
+        Button posts_btn = findViewById(R.id.postBtn);
+        Button story_btn = findViewById(R.id.storyBtn);
 
         View.OnClickListener listener = new View.OnClickListener() {
             @Override
