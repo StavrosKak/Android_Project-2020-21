@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SMN_Arggregator</string>
+    <string name="alert_dialog_title">Select Image Option</string>
+    <string name="dialog_image_options" />
+
+    <string-array name="image_options">
+        <item>Choose photo from gallery</item>
+        <item>Take picture with camera</item>
+    </string-array>
 </resources>

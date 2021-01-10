@@ -94,6 +94,10 @@ public class GetTwitterData {
         return null;
     }
 
+    public void postTweet(String text){
+
+    }
+
 
 
 }
