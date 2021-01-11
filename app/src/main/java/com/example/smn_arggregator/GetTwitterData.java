@@ -3,12 +3,14 @@ package com.example.smn_arggregator;
 import android.telephony.AccessNetworkConstants;
 import android.util.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Query;
 import twitter4j.QueryResult;
 import twitter4j.Status;
+import twitter4j.StatusUpdate;
 import twitter4j.Trend;
 import twitter4j.Trends;
 import twitter4j.Twitter;
@@ -94,7 +96,23 @@ public class GetTwitterData {
         return null;
     }
 
-    public void postTweet(String text){
+    public void postTweet(String text, String path){
+
+        File file = new File(path);
+
+        StatusUpdate status = new StatusUpdate(text); // set the text to be uploaded here.
+
+        if(!path.isEmpty())
+            status.setMedia(file); // set the image to be uploaded here.
+
+        try {
+            twitter.updateStatus(status);
+            Log.d("Bull","Manage to post tweet: ");
+
+        } catch (TwitterException e) {
+            e.printStackTrace();
+            Log.d("Bull","Failed to post tweet: " + e.getMessage());
+        }
 
     }
 

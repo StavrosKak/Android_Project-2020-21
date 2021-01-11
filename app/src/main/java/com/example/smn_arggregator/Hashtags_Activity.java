@@ -28,11 +28,6 @@ public class Hashtags_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hashtags_);
 
-        if (android.os.Build.VERSION.SDK_INT > 8) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-            StrictMode.setThreadPolicy(policy);
-        }
-
         ArrayList<String> Hashtags;
 
         GetTwitterData TwitterObject = new GetTwitterData();
