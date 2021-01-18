@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Status;
@@ -26,8 +27,9 @@ public class PostViewActivity extends AppCompatActivity {
 
 
         final List<Status> posts;
-        GetTwitterData TwitterObject = new GetTwitterData();
+        final GetTwitterData TwitterObject = new GetTwitterData();
         posts =  TwitterObject.getPost(getIntent().getStringExtra("hashtag"));
+
 
         ListView postListView = findViewById(R.id.PostListView);
         PostArrayAdapter postArrayAdapter = new PostArrayAdapter(PostViewActivity.this,R.layout.list_record,posts);
@@ -45,6 +47,16 @@ public class PostViewActivity extends AppCompatActivity {
                 TextView favourites = findViewById(R.id.favourites);
                 TextView retweets = findViewById(R.id.retweet);
 
+                ArrayList<Status> replies;
+                replies = TwitterObject.getReplies(currentPost.getUser().getScreenName(),currentPost.getId());
+                ListView postDetailsListView = findViewById(R.id.PostDetailsListView);
+                PostDetailsArrayAdapter postDetailsArrayAdapter = new PostDetailsArrayAdapter(PostViewActivity.this,R.layout.post_details_list_record,replies);
+                postDetailsListView.setAdapter(postDetailsArrayAdapter);
+
+                for (Status tweet : replies) {
+
+                    Log.d("Bull","REPLIES??? @" + tweet.getUser().getName()+ " ---- " + tweet.getText());
+                }
 
                 createdAt.append(currentPost.getCreatedAt().toString());
                 Log.d("Bull","Created at : "+currentPost.getCreatedAt().toString());

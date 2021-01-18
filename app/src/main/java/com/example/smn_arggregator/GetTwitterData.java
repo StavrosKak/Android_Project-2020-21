@@ -116,6 +116,31 @@ public class GetTwitterData {
 
     }
 
+    public ArrayList<Status> getReplies(String screenName, long tweetID) {
+        ArrayList<Status> replies = new ArrayList<>();
+
+        try {
+            Query query = new Query("to:" + screenName + " since_id:" + tweetID);
+            //query.setCount(10);
+            //query.setLang("en");
+            QueryResult results;
+
+            // if you want all the replies just do the do - while loop
+            //do {
+                results = twitter.search(query);
+                List<Status> tweets = results.getTweets();
+
+                for (Status tweet : tweets)
+                    if (tweet.getInReplyToStatusId() == tweetID)
+                        replies.add(tweet);
+            //} while ((query = results.nextQuery()) != null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return replies;
+    }
+
 
 
 }
