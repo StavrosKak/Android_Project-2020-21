@@ -33,7 +33,7 @@ import java.util.Date;
 public class Post_Activity extends AppCompatActivity {
 
     private ImageView imageView ;
-    private String imagePath;
+    private String imagePath="";
     private Uri photoURI;
     private static final int GALLERY_REQUEST = 9;
     private static final int CAMERA_REQUEST = 11;
@@ -46,7 +46,10 @@ public class Post_Activity extends AppCompatActivity {
 
         imageView= findViewById(R.id.galleryImage);
         Button postBtn = findViewById(R.id.postButton);
-        Button imageBtn = findViewById(R.id.imageBtn);
+        final Button imageBtn = findViewById(R.id.imageBtn);
+        final CheckBox twitterBox = findViewById(R.id.twitterBox);
+        final CheckBox facebookBox = findViewById(R.id.facebookBox);
+        final CheckBox instagramBox = findViewById(R.id.instagramBox);
 
 
 
@@ -65,14 +68,27 @@ public class Post_Activity extends AppCompatActivity {
        postBtn.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               CheckBox twitterBox = findViewById(R.id.twitterBox);
-               CheckBox facebookBox = findViewById(R.id.facebookBox);
-               CheckBox instagramBox = findViewById(R.id.instagramBox);
+
                EditText postEditText = findViewById(R.id.textField);
 
-
                GetTwitterData TwitterObject = new GetTwitterData();
-               //TwitterObject.postTweet(postEditText.getText().toString(),imagePath);
+               GetFacebookData facebookDataObj = new GetFacebookData();
+
+
+               if(twitterBox.isChecked()){
+                   TwitterObject.postTweet(postEditText.getText().toString(),imagePath);
+               }
+
+
+               if(facebookBox.isChecked()){
+                   facebookDataObj.fbPost(postEditText.getText().toString(),imagePath);
+               }
+
+
+               if(instagramBox.isChecked()){
+                   facebookDataObj.igPost(postEditText.getText().toString());
+               }
+
 
 
                Log.d("Bull",postEditText.getText().toString());

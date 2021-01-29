@@ -26,6 +26,9 @@ android {
         it.buildConfigField 'String', 'ConsumerSecretKey', CONSUMER_SECRET_KEY
         it.buildConfigField 'String', 'AccessToken', ACCESS_TOKEN
         it.buildConfigField 'String', 'AccessSecretToken', ACCESS_SECRET_TOKEN
+        it.buildConfigField 'String', 'AppId', APP_ID
+        it.buildConfigField 'String', 'AppSecret', APP_SECRET
+        it.buildConfigField 'String', 'AccessFBToken', ACCESSFB_TOKEN
     }
 }
 
@@ -38,4 +41,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     compile group: 'org.twitter4j', name: 'twitter4j-core', version: '4.0.7'
+    // https://mvnrepository.com/artifact/com.restfb/restfb
+    compile group: 'com.restfb', name: 'restfb', version: '2.8.0'
 }

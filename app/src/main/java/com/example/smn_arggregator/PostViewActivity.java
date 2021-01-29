@@ -12,6 +12,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.restfb.Connection;
+import com.restfb.types.Post;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +32,9 @@ public class PostViewActivity extends AppCompatActivity {
         final List<Status> posts;
         final GetTwitterData TwitterObject = new GetTwitterData();
         posts =  TwitterObject.getPost(getIntent().getStringExtra("hashtag"));
+
+        GetFacebookData facebookDataObj = new GetFacebookData();
+
 
 
         ListView postListView = findViewById(R.id.PostListView);
