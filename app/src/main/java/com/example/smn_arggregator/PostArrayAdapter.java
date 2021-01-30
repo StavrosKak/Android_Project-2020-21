@@ -1,6 +1,8 @@
 package com.example.smn_arggregator;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +15,21 @@ import androidx.annotation.Nullable;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import twitter4j.Status;
 
-public class PostArrayAdapter extends ArrayAdapter<Status> {
+public class PostArrayAdapter extends ArrayAdapter<SMN_Posts> {
 
-    private List<Status> postList;
+    private ArrayList<SMN_Posts> postList;
     private final LayoutInflater inflater;
     private final int layoutResource;
 
 
 
-    public PostArrayAdapter(@NonNull Context context, int resource, @NonNull List<Status> objects) {
+    public PostArrayAdapter(@NonNull Context context, int resource, @NonNull ArrayList<SMN_Posts> objects) {
         super(context, resource, objects);
         postList = objects;
         layoutResource = resource;
@@ -47,15 +51,24 @@ public class PostArrayAdapter extends ArrayAdapter<Status> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        Status currentPost = postList.get(position);
+        SMN_Posts currentPost = postList.get(position);
 
-        viewHolder.UserName.setText(currentPost.getUser().getName());
-        viewHolder.postTxt.setText(currentPost.getText());
-        Picasso.get().load(currentPost.getUser().get400x400ProfileImageURL()).into(viewHolder.UserImage);
-        if (currentPost.getMediaEntities().length > 0) {
-            Picasso.get().load(currentPost.getMediaEntities()[0].getMediaURL()).into(viewHolder.PostImage);
+        if(currentPost.getPost_id()!=-1){
+
+            viewHolder.UserName.setText(currentPost.getPost_username());
+            viewHolder.postTxt.setText(currentPost.getPost_caption());
+            Picasso.get().load(currentPost.getPost_user_image()).into(viewHolder.UserImage);
+            Picasso.get().load(currentPost.getPost_media_url()).into(viewHolder.PostImage);
+            Picasso.get().load(R.drawable.twitter_logo).into(viewHolder.smnLogo);
+
+        }else {
+            viewHolder.UserName.setText(currentPost.getPost_username());
+            viewHolder.postTxt.setText(currentPost.getPost_caption());
+            Picasso.get().load(R.drawable.blank_image).into(viewHolder.UserImage);
+            Picasso.get().load(currentPost.getPost_media_url()).into(viewHolder.PostImage);
+            Picasso.get().load(R.drawable.instagram_logo).into(viewHolder.smnLogo);
+
         }
-
 
         return convertView;
 
@@ -66,12 +79,14 @@ public class PostArrayAdapter extends ArrayAdapter<Status> {
         final ImageView UserImage;
         final TextView postTxt;
         final ImageView PostImage;
+        final ImageView smnLogo;
 
         ViewHolder(View view){
             UserName = view.findViewById(R.id.UserName);
             UserImage = view.findViewById(R.id.UserImage);
             postTxt = view.findViewById(R.id.PostText);
             PostImage = view.findViewById(R.id.PostImage);
+            smnLogo = view.findViewById(R.id.SMNlogo);
         }
     }
 }

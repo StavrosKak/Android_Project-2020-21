@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -89,7 +90,9 @@ public class Post_Activity extends AppCompatActivity {
                    facebookDataObj.igPost(postEditText.getText().toString());
                }
 
-
+               if(!twitterBox.isChecked() && !facebookBox.isChecked() && !instagramBox.isChecked()){
+                   Toast.makeText(Post_Activity.this, "Chose a SMN to post your context !!!", Toast.LENGTH_LONG).show();
+               }
 
                Log.d("Bull",postEditText.getText().toString());
                Log.d("Bull","IMAGE PATH: "+imagePath);
