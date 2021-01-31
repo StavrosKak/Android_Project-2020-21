@@ -23,17 +23,10 @@ public class GetFacebookData {
 
     private static final String AppId = BuildConfig.AppId;
     private static final String AppSecret = BuildConfig.AppSecret;
-
-    //private final FacebookClient.AccessToken accessToken = new DefaultFacebookClient().obtainAppAccessToken(AppId,AppSecret);
-    //private FacebookClient fbClientMe;
-
     private static final String pageAccessToken = BuildConfig.AccessFBToken;
-
-    private final String pageID = "101977808564841";
+    private static final String pageID = BuildConfig.PageID;
     private FacebookClient fbClientPage;
-
     private IgUser igUser;
-
 
 
 
@@ -45,8 +38,7 @@ public class GetFacebookData {
                     Parameter.with("fields", "instagram_business_account"));
 
             igUser = page.getInstagramBusinessAccount();
-            //String token=accessToken.getAccessToken();
-            //fbClientMe = new DefaultFacebookClient(token);
+
         } catch (FacebookException ex) {     //So that you can see what went wrong
             ex.printStackTrace();  //in case you did anything incorrectly
         }
@@ -57,10 +49,6 @@ public class GetFacebookData {
 
     public ArrayList<SMN_Posts> getIGPosts(String hashtag){
         Log.d("IG","igUser ID :  "+igUser.getId());
-
-
-        //FacebookType nodeID = fbClientPage.fetchObject("ig_hashtag_search", FacebookType.class,
-                //Parameter.with("user_id", igUser.getId()),Parameter.with("q","coke"));
 
 
         JsonObject nodeId = fbClientPage.fetchObject("ig_hashtag_search",JsonObject.class,
@@ -80,7 +68,6 @@ public class GetFacebookData {
 
         JsonObject igMediaID = fbClientPage.fetchObject(hashtagID+"/top_media",JsonObject.class,
                 Parameter.with("user_id",igUser.getId()),Parameter.with("fields","id,caption,like_count,media_url,comments_count,timestamp"));
-        //17843833456057225/recent_media?fields=id,caption,like_count,media_url,comments_count,timestamp&user_id=17841445611557468
 
         JsonArray mediaArray = igMediaID.get("data").asArray();
 
@@ -152,10 +139,10 @@ public class GetFacebookData {
             }
 
         }
-        else
+        else{
+
             fbClientPage.publish(pageID + "/feed", FacebookType.class, Parameter.with("message",  text));
-
-
+        }
 
     }
 

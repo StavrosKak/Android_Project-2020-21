@@ -29,6 +29,7 @@ android {
         it.buildConfigField 'String', 'AppId', APP_ID
         it.buildConfigField 'String', 'AppSecret', APP_SECRET
         it.buildConfigField 'String', 'AccessFBToken', ACCESSFB_TOKEN
+        it.buildConfigField 'String', 'PageID', PAGE_ID
     }
 }
 

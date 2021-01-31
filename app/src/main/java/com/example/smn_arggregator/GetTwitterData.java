@@ -45,25 +45,37 @@ public class GetTwitterData {
     public ArrayList<String> getTrends(){
 
         ArrayList<String> Hashtags = new ArrayList<>();
+        ArrayList<Integer> woeid = new ArrayList<>();
+        woeid.add(23424975);
+        woeid.add(23424977);
+        woeid.add(1100968);
+        woeid.add(2459115);
 
-        try{
-            // UK = 23424975  United States: 23424977 New York: 2459115
-            Trends trends = twitter.getPlaceTrends(23424975);
-            int count =0;
+        for(int i=0 ; i<4;i++)
+        {
 
-            for(Trend trend : trends.getTrends()){
+            try{
+                // UK = 23424975  United States: 23424977 New York: 2459115
+                Trends trends = twitter.getPlaceTrends(woeid.get(i));
+                int count =0;
 
-                if(trend.getName().startsWith("#")){
-                    Hashtags.add(trend.getName());
+                for(Trend trend : trends.getTrends()){
+
+                    if(trend.getName().startsWith("#")){
+                        if(!Hashtags.contains(trend.getName())){
+                            Hashtags.add(trend.getName());
+                        }
+
+                    }
+                    Log.d("Bull",count+"   "+trend.getName());
+                    count++;
+
                 }
 
-                Log.d("Bull",count+"   "+trend.getName());
-                count++;
-
+            }catch(TwitterException exception){
+                exception.printStackTrace();
             }
 
-        }catch(TwitterException exception){
-            exception.printStackTrace();
         }
 
         return Hashtags;

@@ -1,5 +1,6 @@
 package com.example.smn_arggregator;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +26,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -36,6 +41,7 @@ public class Post_Activity extends AppCompatActivity {
     private ImageView imageView ;
     private String imagePath="";
     private Uri photoURI;
+    private EditText postEditText;
     private static final int GALLERY_REQUEST = 9;
     private static final int CAMERA_REQUEST = 11;
 
@@ -46,13 +52,12 @@ public class Post_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_post_);
 
         imageView= findViewById(R.id.galleryImage);
-        Button postBtn = findViewById(R.id.postButton);
+        postEditText = findViewById(R.id.textField);
+        final Button postBtn = findViewById(R.id.postButton);
         final Button imageBtn = findViewById(R.id.imageBtn);
         final CheckBox twitterBox = findViewById(R.id.twitterBox);
         final CheckBox facebookBox = findViewById(R.id.facebookBox);
         final CheckBox instagramBox = findViewById(R.id.instagramBox);
-
-
 
         imageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,28 +75,37 @@ public class Post_Activity extends AppCompatActivity {
            @Override
            public void onClick(View v) {
 
-               EditText postEditText = findViewById(R.id.textField);
 
                GetTwitterData TwitterObject = new GetTwitterData();
                GetFacebookData facebookDataObj = new GetFacebookData();
 
+               if(postEditText.getText().toString().isEmpty() && imagePath.isEmpty()){
 
-               if(twitterBox.isChecked()){
-                   TwitterObject.postTweet(postEditText.getText().toString(),imagePath);
-               }
+                   Toast.makeText(Post_Activity.this, "Chose an image or write something to post!!!", Toast.LENGTH_LONG).show();
+
+               }else{
+
+                   if(twitterBox.isChecked()){
+                       TwitterObject.postTweet(postEditText.getText().toString(),imagePath);
+                       Toast.makeText(Post_Activity.this, "You posted on twitter!!!", Toast.LENGTH_SHORT).show();
+                   }
 
 
-               if(facebookBox.isChecked()){
-                   facebookDataObj.fbPost(postEditText.getText().toString(),imagePath);
-               }
+                   if(facebookBox.isChecked()){
+                       facebookDataObj.fbPost(postEditText.getText().toString(),imagePath);
+                       Toast.makeText(Post_Activity.this, "You posted on facebook!!!", Toast.LENGTH_SHORT).show();
+                   }
 
 
-               if(instagramBox.isChecked()){
-                   facebookDataObj.igPost(postEditText.getText().toString());
-               }
+                   if(instagramBox.isChecked()){
+                       facebookDataObj.igPost(postEditText.getText().toString());
+                      Toast.makeText(Post_Activity.this, "You posted on instagram!!!", Toast.LENGTH_SHORT).show();
+                   }
 
-               if(!twitterBox.isChecked() && !facebookBox.isChecked() && !instagramBox.isChecked()){
-                   Toast.makeText(Post_Activity.this, "Chose a SMN to post your context !!!", Toast.LENGTH_LONG).show();
+                   if(!twitterBox.isChecked() && !facebookBox.isChecked() && !instagramBox.isChecked()){
+                       Toast.makeText(Post_Activity.this, "Chose a SMN to post your context !!!", Toast.LENGTH_LONG).show();
+                   }
+
                }
 
                Log.d("Bull",postEditText.getText().toString());
@@ -216,6 +230,4 @@ public class Post_Activity extends AppCompatActivity {
 
         }
     }
-
-
 }

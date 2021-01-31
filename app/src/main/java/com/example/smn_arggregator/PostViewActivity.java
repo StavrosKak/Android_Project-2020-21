@@ -81,7 +81,7 @@ public class PostViewActivity extends AppCompatActivity {
                 createdAt.append(currentPost.getPost_timestamp());
                 Log.d("Bull","Created at : "+currentPost.getPost_timestamp());
                 favourites.append(currentPost.getPost_like_count()+"");
-                retweets.setText("Comments :"+currentPost.getPost_comments_count());
+                retweets.setText("Comments : "+currentPost.getPost_comments_count());
                 returnBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
