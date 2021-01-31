@@ -45,4 +45,7 @@ ACCESSFB_TOKEN="your_page_access_token"
 In my app i only use the PAGE_ID and ACCESSFB_TOKEN (which is the page acces token). The other ones are there in case of improvements or additional functionalities.
 To get your page_id and page_access_token you need to go to the Facebook Graph API Explorer and make a GET request : me/accounts  
 
+Finaly you need to give the app the permission to access internal storage so you need to go to Settings -> Apps -> SMN_Aggregetor -> Permissions and then
+enable Storage.
+
 ## Enjoy !!!
